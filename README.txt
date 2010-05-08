@@ -14,3 +14,44 @@ You should now be able to execute this in any terminal that you open.
 I have a created a folder for each script, or set of scripts.
 
 Have fun!!!
+
+Here are specific instructions for the individual scripts / sets of scripts:
+
+####################################################################################
+1. gred
+
+Used for invoking a text editor of choice on a Grails project from the command line.
+
+Ensure that you have the following line in your .bashrc file:
+export EDITOR="/path/to/editor"
+
+Now change to the directory of your project:
+cd myproject
+
+By simply entering the command, you will receive the following help:
+
+Usage: gred <domain class> [options]
+ options:
+     -tests       :  open all unit and itegration tests.
+     -unit        :  open unit tests
+     -integration :  open integration tests
+     -int         :  open integration tests
+     -builder     :  open test object builders
+     -controller  :  open controller
+     -service     :  open all services
+     -views       :  open all .gsp files for domain class
+
+
+An example of using the scripts:
+Having a User domain class with unit and integration tests in your Grails project,
+you can open gedit on all the related artifacts by simply typing:
+> gred user -all
+
+If you only wanted to see the integration test, you could type:
+> gred user -integration
+or simply
+> gred user -int
+
+It is also noteworthy that the name of the domain class can be written in a case-insensitive 
+way for convenience.
+
