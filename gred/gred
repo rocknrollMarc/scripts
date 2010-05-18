@@ -16,8 +16,9 @@ if [ -z "$1" ]; then
     echo "     -controller  :  open controller"
     echo "     -service     :  open all services"
     echo "     -views       :  open all .gsp files for domain class"
+    echo "     -reports     :  open all test reports"
 fi
-    
+
 INPUT=$(echo "$1" | tr [A-Z] [a-z])
 #echo "Input: $INPUT"
 
@@ -69,11 +70,17 @@ if [ "$OPTION" = '-service' -o "$OPTION" = '-all' ]; then
     find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
 fi
 
+if [ "$OPTION" = '-reports' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="TEST-*$INPUT*\Tests.txt"
+    DIR_PORTION='target/test-reports/plain'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
 if [ "$OPTION" = '' -o "$OPTION" = '-domain' -o "$OPTION" = '-all' ]; then
     FILE_NAME="$INPUT.groovy"
     DIR_PORTION='grails-app'
     find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
 fi
+
 #echo "Looking in directory: $DIR_PORTION"
 #echo "Opening file: $FILE_NAME"
-
