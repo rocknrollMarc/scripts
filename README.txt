@@ -40,6 +40,7 @@ Usage: gred <domain class> [options]
      -controller  :  open controller
      -service     :  open all services
      -views       :  open all .gsp files for domain class
+     -reports     :  open all test reports
 
 
 An example of using the scripts:
