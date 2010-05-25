@@ -76,11 +76,22 @@ if [ "$OPTION" = '-reports' -o "$OPTION" = '-all' ]; then
     find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
 fi
 
+if [ "$OPTION" = '-conf' -o "$OPTION" = '-all' ]; then
+    case "$INPUT" in
+        data*) FILE_NAME="*Data*";;
+        boot*) FILE_NAME="*Boot*";;
+        config*) FILE_NAME="*Config*";;
+        map*) FILE_NAME="*Map*";;
+        build*) FILE_NAME="*Build*";;
+        *) FILE_NAME="*.groovy";;
+    esac
+    DIR_PORTION='grails-app/conf'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
 if [ "$OPTION" = '' -o "$OPTION" = '-domain' -o "$OPTION" = '-all' ]; then
     FILE_NAME="$INPUT.groovy"
     DIR_PORTION='grails-app'
     find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
 fi
 
-#echo "Looking in directory: $DIR_PORTION"
-#echo "Opening file: $FILE_NAME"
