@@ -65,7 +65,7 @@ if [ "$OPTION" = '-controller' -o "$OPTION" = '-all' ]; then
 fi
 
 if [ "$OPTION" = '-service' -o "$OPTION" = '-all' ]; then
-    FILE_NAME="$INPUT\.groovy"
+    FILE_NAME="$INPUT\Service.groovy"
     DIR_PORTION='grails-app/services'
     find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
 fi
