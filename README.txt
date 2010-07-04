@@ -58,7 +58,7 @@ way for convenience.
 
 2. griffed
 
-Used for invoking a text editor of choice on a Griffin project from the command line.
+Used for invoking a text editor of choice on a Griffon project from the command line.
 
 Ensure that you have the following line in your .bashrc file:
 export EDITOR="/path/to/editor"
@@ -84,7 +84,7 @@ Usage: griffed <group> [options]
 
 
 An example of using the script:
-Having a MyGroup with unit and integration tests in your Griffin project,
+Having a MyGroup with unit and integration tests in your Griffon project,
 you can open gedit on all the related artifacts by simply typing:
 > griffed mygroup -all
 
