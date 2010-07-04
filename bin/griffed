@@ -1,0 +1,100 @@
+#!/bin/bash
+
+if [ -z "$EDITOR" ]; then
+    EDITOR="gedit"
+fi
+
+#exec $EDITOR &
+
+if [ -z "$1" ]; then
+    echo "Usage: griffed <group> [options]"
+    echo " options:"
+    echo "     -controller  :  open controller"
+    echo "     -view        :  open view"
+    echo "     -model       :  open model"
+    echo "     -service     :  open service"
+    echo "     -tests       :  open all unit and itegration tests."
+    echo "     -unit        :  open unit tests"
+    echo "     -integration :  open integration tests"
+    echo "     -int         :  open integration tests"
+    echo "     -builder     :  open test object builders"
+    echo "     -reports     :  open all test reports"
+fi
+
+INPUT=$(echo "$1" | tr [A-Z] [a-z])
+#echo "Input: $INPUT"
+
+if [ ! -d "$(pwd)/griffon-app" -a ! -f "$(pwd)/application.properties" ]; then
+    echo 'This is not a valid Griffon project!'
+    exit
+fi
+
+OPTION=''
+if [ ! -z $2 ]; then
+    OPTION=$2
+fi
+
+if [ "$OPTION" = '-view' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="$INPUT\View.groovy"
+    DIR_PORTION='griffon-app/views'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
+if [ "$OPTION" = '-controller' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="$INPUT\Controller.groovy"
+    DIR_PORTION='griffon-app/controllers'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
+if [ "$OPTION" = '-model' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="$INPUT\Model.groovy"
+    DIR_PORTION='griffon-app/models'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
+if [ "$OPTION" = '-service' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="$INPUT\Service.groovy"
+    DIR_PORTION='griffon-app/services'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
+if [ "$OPTION" = '-unit' -o "$OPTION" = '-tests' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="$INPUT*Tests.groovy"
+    DIR_PORTION='test/unit'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
+if [ "$OPTION" = '-integration' -o "$OPTION" = '-int' -o "$OPTION" = '-tests' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="$INPUT*Tests.groovy"
+    DIR_PORTION='test/integration'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
+if [ "$OPTION" = '-builder' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="$INPUT\Builder.groovy"
+    DIR_PORTION='griffon-app'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
+if [ "$OPTION" = '-reports' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="TEST-*$INPUT*\Tests.txt"
+    DIR_PORTION='target/test-reports/plain'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
+if [ "$OPTION" = '-conf' -o "$OPTION" = '-all' ]; then
+    case "$INPUT" in
+        app*) FILE_NAME="Application.groovy";;
+        config*) FILE_NAME="Config.groovy";;
+        build*) FILE_NAME="Builder.groovy";;
+    esac
+    DIR_PORTION='griffon-app/conf'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+
+if [ "$OPTION" = '' -o "$OPTION" = '-domain' -o "$OPTION" = '-all' ]; then
+    FILE_NAME="$INPUT.groovy"
+    DIR_PORTION='griffon-app'
+    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
+fi
+

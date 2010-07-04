@@ -43,7 +43,7 @@ Usage: gred <domain class> [options]
      -reports     :  open all test reports
 
 
-An example of using the scripts:
+An example of using the script:
 Having a User domain class with unit and integration tests in your Grails project,
 you can open gedit on all the related artifacts by simply typing:
 > gred user -all
@@ -54,5 +54,45 @@ or simply
 > gred user -int
 
 It is also noteworthy that the name of the domain class can be written in a case-insensitive 
+way for convenience.
+
+2. griffed
+
+Used for invoking a text editor of choice on a Griffin project from the command line.
+
+Ensure that you have the following line in your .bashrc file:
+export EDITOR="/path/to/editor"
+
+Now change to the directory of your project:
+cd myproject
+
+By simply entering the command, you will receive the following help:
+
+Usage: griffed <group> [options]
+ options:
+     -controller  :  open controller
+     -view        :  open view
+     -model       :  open model
+     -service     :  open service
+     -tests       :  open all unit and itegration tests.
+     -unit        :  open unit tests
+     -integration :  open integration tests
+     -int         :  open integration tests
+     -builder     :  open test object builders
+     -reports     :  open all test reports
+     -all         :  open all artifacts for the group
+
+
+An example of using the script:
+Having a MyGroup with unit and integration tests in your Griffin project,
+you can open gedit on all the related artifacts by simply typing:
+> griffed mygroup -all
+
+If you only wanted to see the integration test, you could type:
+> griffed mygroup -integration
+or simply
+> griffed mygroup -int
+
+It is also noteworthy that the name of the group can be written in a case-insensitive 
 way for convenience.
 
