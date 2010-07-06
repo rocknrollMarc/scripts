@@ -4,8 +4,6 @@ if [ -z "$EDITOR" ]; then
     EDITOR="gedit"
 fi
 
-#exec $EDITOR &
-
 if [ -z "$1" ]; then
     echo "Usage: griffed <group> [options]"
     echo " options:"
@@ -19,6 +17,7 @@ if [ -z "$1" ]; then
     echo "     -int         :  open integration tests"
     echo "     -builder     :  open test object builders"
     echo "     -reports     :  open all test reports"
+    exit
 fi
 
 INPUT=$(echo "$1" | tr [A-Z] [a-z])
@@ -27,9 +26,11 @@ INPUT=$(echo "$1" | tr [A-Z] [a-z])
 if [ ! -d "$(pwd)/griffon-app" -a ! -f "$(pwd)/application.properties" ]; then
     echo 'This is not a valid Griffon project!'
     exit
+else
+    exec $EDITOR &
 fi
 
-OPTION=''
+OPTION='-all'
 if [ ! -z $2 ]; then
     OPTION=$2
 fi
@@ -89,12 +90,6 @@ if [ "$OPTION" = '-conf' -o "$OPTION" = '-all' ]; then
         build*) FILE_NAME="Builder.groovy";;
     esac
     DIR_PORTION='griffon-app/conf'
-    find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
-fi
-
-if [ "$OPTION" = '' -o "$OPTION" = '-domain' -o "$OPTION" = '-all' ]; then
-    FILE_NAME="$INPUT.groovy"
-    DIR_PORTION='griffon-app'
     find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
 fi
 
