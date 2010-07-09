@@ -1,0 +1,18 @@
+#!/bin/bash
+
+if [ -z "$1" ]; then
+    echo "Usage: grails-link <version>"
+    exit
+fi
+
+BASE_DIR="/usr/local"
+echo "Trying $BASE_DIR/grails-$1"
+if [ -d "$BASE_DIR/grails-$1" ];
+then
+    unlink "$BASE_DIR/grails"
+    ln -s "$BASE_DIR/grails-$1" "$BASE_DIR/grails"
+    echo "Linked up Grails $1..."
+else
+    echo "Not a valid Grails version..."
+fi
+
