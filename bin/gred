@@ -7,6 +7,7 @@ fi
 
 if [ -z "$1" ]; then
     echo "Usage: gred <domain class> [options]"
+    echo "Usage: gred <config type> -conf"
     echo " options:"
     echo "     -tests       :  open all unit and itegration tests."
     echo "     -unit        :  open unit tests"
@@ -76,13 +77,14 @@ if [ "$OPTION" = '-reports' -o "$OPTION" = '-all' ]; then
     find $DIR_PORTION -iname "$FILE_NAME" -exec "$EDITOR" {} \;
 fi
 
-if [ "$OPTION" = '-conf' -o "$OPTION" = '-all' ]; then
+if [ "$OPTION" = '-conf' ]; then
     case "$INPUT" in
-        data*) FILE_NAME="*Data*";;
-        boot*) FILE_NAME="*Boot*";;
-        config*) FILE_NAME="*Config*";;
-        map*) FILE_NAME="*Map*";;
-        build*) FILE_NAME="*Build*";;
+        data*) FILE_NAME="DataSource.groovy";;
+        boot*) FILE_NAME="*BootStrap.groovy";;
+        conf*) FILE_NAME="Config.groovy";;
+        url*) FILE_NAME="UrlMappings.groovy";;
+        map*) FILE_NAME="UrlMappings.groovy";;
+        build*) FILE_NAME="BuildConfig.groovy";;
         *) FILE_NAME="*.groovy";;
     esac
     DIR_PORTION='grails-app/conf'
